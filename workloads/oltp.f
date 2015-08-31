@@ -47,7 +47,7 @@ define fileset name=logfile,path=$dir,size=$logfilesize,filesizegamma=0,entries=
 
 define process name=lgwr,instances=1
 {
-  thread name=lgwr,memsize=$memperthread,useism
+  thread name=lgwr,memsize=$memperthread
   {
     flowop aiowrite name=lg-write,filesetname=logfile,
         iosize=256k,random,directio=$directio,dsync
@@ -59,7 +59,7 @@ define process name=lgwr,instances=1
 # Define database writer processes
 define process name=dbwr,instances=$ndbwriters
 {
-  thread name=dbwr,memsize=$memperthread,useism
+  thread name=dbwr,memsize=$memperthread
   {
     flowop aiowrite name=dbwrite-a,filesetname=datafiles,
         iosize=$iosize,workingset=$workingset,random,iters=100,opennext,directio=$directio,dsync
@@ -71,7 +71,7 @@ define process name=dbwr,instances=$ndbwriters
 
 define process name=shadow,instances=$nshadows
 {
-  thread name=shadow,memsize=$memperthread,useism
+  thread name=shadow,memsize=$memperthread
   {
     flowop read name=shadowread,filesetname=datafiles,
       iosize=$iosize,workingset=$workingset,random,opennext,directio=$directio
