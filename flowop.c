@@ -499,7 +499,7 @@ flowop_start(threadflow_t *threadflow)
 	/* Set to the start of the new flowop list */
 	flowop = threadflow->tf_thrd_fops;
 
-	memsize = (size_t)threadflow->tf_constmemsize;
+	memsize = (size_t)threadflow->tf_constmemsize + 512;
 
 	/* If we are going to use ISM, allocate later */
 	if (threadflow->tf_attrs & THREADFLOW_USEISM) {
